@@ -6,7 +6,7 @@ import { Gender } from "./gender.db";
 import { Form } from "./form.db";
 import { Illegal } from "./illegal.db";
 
-// import { Evolution } from './evolution.db' 
+// import { Evolution } from './evolution.db'
 
 import { Task } from "./task.db";
 import { Research } from "./research.db";
@@ -32,6 +32,7 @@ const shinyForm = (form) => `${form}-Shiny`;
 const alphaForm = (form) => `${form}-Alpha`;
 
 Object.values(Pokemon).forEach((pokemon) => {
+  // @ts-expect-error duh
   pokemon.uniques = pokemon.forms.flatMap((form) => {
     const formName = `${pokemon.name}-${form}`;
     const forms = [formName];
@@ -40,13 +41,13 @@ Object.values(Pokemon).forEach((pokemon) => {
       // forms.push(shinyForm(formName)); //* biggest compromise :(
       if (alphaP(pokemon, form)) {
         forms.push(shinyForm(alphaForm(formName)));
-      }
-       else {
+      } else {
         forms.push(shinyForm(formName));
       }
     } // Game specific - No alpha that can't be shiny
 
     return forms.flatMap((form) =>
+      // @ts-expect-error duh
       pokemon.genders.map((gender) => `${form}-${gender}`)
     );
   });
@@ -304,7 +305,9 @@ function _Pokemon() {
   };
 
   Object.values(pokemons).forEach((pokemon) => {
+    // @ts-expect-error duh
     pokemon.genders = [];
+    // @ts-expect-error duh
     pokemon.forms = [];
     // restrictions?: []
   });
@@ -326,5 +329,6 @@ function alphaP(pokemon, form) {
   return !form.match(pokemon.restrictions["Alpha"]);
 }
 
+// @ts-expect-error duh
 window.YY = { Pokemon, ResearchExpanded };
 export { Pokemon, ResearchExpanded as Research };
