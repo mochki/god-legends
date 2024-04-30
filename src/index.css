@@ -43,3 +43,7 @@ body {
   flex-direction: column;
   position: relative;
 }
+
+main {
+  min-height: calc(100vh - 2rem);
+}

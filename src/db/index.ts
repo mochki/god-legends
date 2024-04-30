@@ -6,7 +6,6 @@ import { Gender } from "./gender.db";
 import { Form } from "./form.db";
 import { Illegal } from "./illegal.db";
 
-
 // TODO: import { Evolution } from './evolution.db'
 
 import { Task } from "./task.db";
@@ -59,6 +58,15 @@ const ResearchExpanded = Research.map(([id, taskId, goal]) => [
   id,
   { ...Task[taskId], goal },
 ]);
+
+const Fn = {
+  fetchResearchIdsForPid: (pid) =>
+    ResearchExpanded.reduce(
+      (accum, [taskPid], researchId) =>
+        taskPid === pid ? [...accum, researchId] : accum,
+      []
+    ),
+};
 
 function _Pokemon() {
   const pokemons = {
@@ -333,4 +341,4 @@ function alphaP(pokemon, form) {
 
 // @ts-expect-error duh
 window.YY = { Pokemon, ResearchExpanded };
-export { Pokemon, ResearchExpanded as Research };
+export { Pokemon, ResearchExpanded as Research, Fn };
