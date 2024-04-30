@@ -1,7 +1,7 @@
 {
-  "name": "arceus",
+  "name": "god-legends",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1001",
   "type": "module",
   "scripts": {
     "dev": "vite",
