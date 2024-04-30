@@ -1,16 +1,16 @@
-import { Pokemon } from "../db";
-
-const uniques = Object.values(Pokemon)
-  // @ts-expect-error duh
-  .map((pkmn) => pkmn.uniques)
-  .flat();
+import { Research as R } from "../db";
 
 export default function Research() {
   return (
-    <>
-      {uniques.map((_) => (
-        <div>{_}</div>
+    <div className="grid grid-cols-4">
+      {R.map(([idx, { task, category, goal }]) => (
+        <>
+          <div>{task}</div>
+          <div>{goal}</div>
+          <div>Pokemon #{idx}</div>
+          <div>{category}</div>
+        </>
       ))}
-    </>
+    </div>
   );
 }

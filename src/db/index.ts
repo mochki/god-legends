@@ -53,6 +53,7 @@ Object.values(Pokemon).forEach((pokemon) => {
     );
   });
 });
+// --> gross version for all forms
 
 const ResearchExpanded = Research.map(([id, taskId, goal]) => [
   id,
