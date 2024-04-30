@@ -11,7 +11,7 @@ export default function BoxLayout() {
       {uniques.map((uniqueForm) => (
         <div key={uniqueForm} className="w-32 h-32">
           {uniqueForm.split("-").map((subForm) => (
-            <div>{subForm}</div>
+            <div key={`${uniqueForm}-${subForm}`}>{subForm}</div>
           ))}
         </div>
       ))}
