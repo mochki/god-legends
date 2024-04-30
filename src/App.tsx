@@ -32,7 +32,7 @@ export default function App() {
           <button onClick={handleViewClick}>Le Settings</button>
         </nav>
         <div>
-          Research: <progress max="100" value={taskCompletion} />
+          Research: <progress max="100" value={taskCompletion} /> {taskCompletion.toFixed(1)}%
         </div>
         <div>
           WIP.Box: <progress max="100" value="20" />
