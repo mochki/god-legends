@@ -68,7 +68,7 @@ export default function Workspace() {
                 )}
               </div>
               <div className="border-y border-y-indigo-200 my-2 py-1">
-                {researchCat ? (
+                {researchCat ?
                   <div className="grid grid-cols-[max-content_minmax(0,_1fr)_max-content] gap-x-1">
                     {React.Children.toArray(
                       remainingTasks
@@ -83,9 +83,7 @@ export default function Workspace() {
                         )),
                     )}
                   </div>
-                ) : (
-                  <div className="text-center text-sm">Select a Category</div>
-                )}
+                : <div className="text-center text-sm">Select a Category</div>}
               </div>
             </div>
           )}
@@ -93,7 +91,7 @@ export default function Workspace() {
           {view === "All Forms" && <Forms />}
           {view === "Le Settings" && <Settings />} */}
           {workspaceEntities.map(({type, data: {pkid, task, category, goal, type: moveType}}) =>
-            type === 'Task' ? (
+            type === 'Task' ?
               <div className="flex flex-col" key={`${pkid}-${task}`}>
                 <div className="flex justify-between">
                   <div className="font-semibold">{Pokemon[pkid].name}</div>
@@ -147,7 +145,7 @@ export default function Workspace() {
                   </div>
                 )}
               </div>
-            ) : null,
+            : null,
           )}
         </div>
       </section>

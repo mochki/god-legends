@@ -42,8 +42,9 @@ export default function Research() {
       <div>Category</div>
       {React.Children.toArray(
         R.map(([pkid, {task, category, goal, type}], idx) =>
-          filterView && statuses[idx] ? null : (
-            <div
+          filterView && statuses[idx] ?
+            null
+          : <div
               className="grid grid-cols-subgrid col-span-7 items-center hover:bg-slate-600 cursor-pointer"
               onClick={makeTaskSelectHandler({
                 taskId: idx,
@@ -68,8 +69,7 @@ export default function Research() {
               <div className="">{goal}</div>
               <div className="">{type}</div>
               <div className="">{category}</div>
-            </div>
-          ),
+            </div>,
         ),
       )}
       <div
