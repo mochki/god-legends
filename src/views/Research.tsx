@@ -1,28 +1,71 @@
 import React, { useState } from "react";
 import { useTracker } from "../store/tracker";
+import { useAppState } from "../store/app-state";
 
 import { Pokemon, Research as R } from "../db";
 
 export default function Research() {
-  // @ts-expect-error duh
-  const statuses = useTracker((state) => state.researchTasks);
-  // @ts-expect-error duh
-  const updateResearchTask = useTracker((state) => state.updateResearchTask);
-
   const [filterView, setFilterView] = useState(false);
 
+  const statuses = useTracker(({ researchTasks }) => researchTasks);
+  const updateResearchTask = useTracker(
+    ({ updateResearchTask }) => updateResearchTask
+  );
+
+  const workspaceEntities = useAppState(
+    ({ workspaceEntities }) => workspaceEntities
+  );
+  const updateWorkspaceEntities = useAppState(
+    ({ updateWorkspaceEntities }) => updateWorkspaceEntities
+  );
+
+  const makeTaskSelectHandler = (task) => (e) => {
+    if (e.target.type === "checkbox") {
+      e.stopPropagation();
+      return;
+    }
+
+    if (
+      workspaceEntities.find(
+        (ent) => (ent.data.taskId || '') === task.taskId
+      )
+    ) {
+      return;
+    }
+
+    updateWorkspaceEntities({
+      type: "Task",
+      data: task,
+    });
+  };
+
   return (
-    <div className="grid gap-x-1 grid-cols-[repeat(5,_max-content)_repeat(1,_minmax(0,_1fr))]">
+    <div className="grid gap-x-1 grid-cols-[repeat(6,_max-content)_repeat(1,_minmax(0,_1fr))] center">
+      <div>pkId</div>
+      <div>Pokemon</div>
+      <div>Task</div>
+      <div>Fin</div>
+      <div>Goal</div>
+      <div>Type?</div>
+      <div>Category</div>
       {React.Children.toArray(
-        R.map(([pkid, { task, category, goal }], idx) =>
+        R.map(([pkid, { task, category, goal, type }], idx) =>
           filterView && statuses[idx] ? null : (
-            <>
-              <div className="hover:bg-slate-600 cursor-pointer">#{pkid}</div>
-              <div className="hover:bg-slate-600 cursor-pointer">
-                {Pokemon[pkid].name}
-              </div>
-              <div className="hover:bg-slate-600 cursor-pointer">{task}</div>
-              <div className="hover:bg-slate-600 cursor-pointer p-1">
+            <div
+              className="grid grid-cols-subgrid col-span-7 items-center hover:bg-slate-600 cursor-pointer"
+              onClick={makeTaskSelectHandler({
+                taskId: idx,
+                pkid,
+                task,
+                category,
+                goal,
+                type,
+              })}
+            >
+              <div>#{pkid}</div>
+              <div>{Pokemon[pkid].name}</div>
+              <div>{task}</div>
+              <div className="p-1">
                 <input
                   type="checkbox"
                   className="h-4 w-4 cursor-pointer"
@@ -30,11 +73,10 @@ export default function Research() {
                   onChange={() => updateResearchTask(idx, !statuses[idx])}
                 />
               </div>
-              <div className="hover:bg-slate-600 cursor-pointer">{goal}</div>
-              <div className="hover:bg-slate-600 cursor-pointer">
-                {category}
-              </div>
-            </>
+              <div className="">{goal}</div>
+              <div className="">{type}</div>
+              <div className="">{category}</div>
+            </div>
           )
         )
       )}
