@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTracker } from "./store/tracker";
-import { useAppState } from "./store/appState";
+import { useAppState } from "./store/app-state";
 
 import Research from "./views/Research";
 import BoxLayout from "./views/BoxLayout";
