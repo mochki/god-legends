@@ -1,40 +1,32 @@
-import React, { useState } from "react";
-import { useTracker } from "../store/tracker";
-import { useAppState } from "../store/app-state";
+import React, {useState} from 'react';
+import {useTracker} from '../store/tracker';
+import {useAppState} from '../store/app-state';
 
-import { Pokemon, Research as R } from "../db";
+import {Pokemon, Research as R} from '../db';
 
 export default function Research() {
   const [filterView, setFilterView] = useState(false);
 
-  const statuses = useTracker(({ researchTasks }) => researchTasks);
-  const updateResearchTask = useTracker(
-    ({ updateResearchTask }) => updateResearchTask
-  );
+  const statuses = useTracker(({researchTasks}) => researchTasks);
+  const updateResearchTask = useTracker(({updateResearchTask}) => updateResearchTask);
 
-  const workspaceEntities = useAppState(
-    ({ workspaceEntities }) => workspaceEntities
-  );
+  const workspaceEntities = useAppState(({workspaceEntities}) => workspaceEntities);
   const updateWorkspaceEntities = useAppState(
-    ({ updateWorkspaceEntities }) => updateWorkspaceEntities
+    ({updateWorkspaceEntities}) => updateWorkspaceEntities,
   );
 
-  const makeTaskSelectHandler = (task) => (e) => {
-    if (e.target.type === "checkbox") {
+  const makeTaskSelectHandler = task => e => {
+    if (e.target.type === 'checkbox') {
       e.stopPropagation();
       return;
     }
 
-    if (
-      workspaceEntities.find(
-        (ent) => (ent.data.taskId || '') === task.taskId
-      )
-    ) {
+    if (workspaceEntities.find(ent => (ent.data.taskId || '') === task.taskId)) {
       return;
     }
 
     updateWorkspaceEntities({
-      type: "Task",
+      type: 'Task',
       data: task,
     });
   };
@@ -49,7 +41,7 @@ export default function Research() {
       <div>Type?</div>
       <div>Category</div>
       {React.Children.toArray(
-        R.map(([pkid, { task, category, goal, type }], idx) =>
+        R.map(([pkid, {task, category, goal, type}], idx) =>
           filterView && statuses[idx] ? null : (
             <div
               className="grid grid-cols-subgrid col-span-7 items-center hover:bg-slate-600 cursor-pointer"
@@ -77,8 +69,8 @@ export default function Research() {
               <div className="">{type}</div>
               <div className="">{category}</div>
             </div>
-          )
-        )
+          ),
+        ),
       )}
       <div
         className="fixed bottom-4 left-3 h-12 w-12 flex items-center justify-center cursor-pointer bg-indigo-600/25 rounded-full text-indigo-100/50 hover:bg-indigo-600 hover:text-indigo-100 transition duration-300"

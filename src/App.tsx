@@ -1,25 +1,24 @@
-import { useState } from "react";
-import { useTracker } from "./store/tracker";
-import { useAppState } from "./store/app-state";
+import {useState} from 'react';
+import {useTracker} from './store/tracker';
+import {useAppState} from './store/app-state';
 
-import Research from "./views/Research";
-import BoxLayout from "./views/BoxLayout";
-import Forms from "./views/Forms";
-import Settings from "./views/Settings";
-import Workspace from "./components/Workspace";
+import Research from './views/Research';
+import BoxLayout from './views/BoxLayout';
+import Forms from './views/Forms';
+import Settings from './views/Settings';
+import Workspace from './components/Workspace';
 
 export default function App() {
-  const view = useAppState(({ view }) => view);
+  const view = useAppState(({view}) => view);
   const setView = useAppState(({updateView}) => updateView);
   const [workspace, setWorkspace] = useState(true);
   // @ts-expect-error duh
-  const researchTasks = useTracker((state) => state.researchTasks);
+  const researchTasks = useTracker(state => state.researchTasks);
 
   const taskCompletion =
-    (100 * researchTasks.reduce((sum, status) => sum + Number(status), 0)) /
-    researchTasks.length;
+    (100 * researchTasks.reduce((sum, status) => sum + Number(status), 0)) / researchTasks.length;
 
-  const handleViewClick = (e) => setView(e.target.innerText);
+  const handleViewClick = e => setView(e.target.innerText);
   const handleWorkspacToggle = () => setWorkspace(!workspace);
 
   return (
@@ -46,10 +45,10 @@ export default function App() {
       </header>
       <main className="flex">
         <div className="flex-auto p-2">
-          {view === "Research" && <Research />}
-          {view === "Box Layout" && <BoxLayout />}
-          {view === "All Forms" && <Forms />}
-          {view === "Le Settings" && <Settings />}
+          {view === 'Research' && <Research />}
+          {view === 'Box Layout' && <BoxLayout />}
+          {view === 'All Forms' && <Forms />}
+          {view === 'Le Settings' && <Settings />}
         </div>
         {workspace && <Workspace />}
       </main>
