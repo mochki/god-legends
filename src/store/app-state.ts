@@ -1,23 +1,23 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import {create} from 'zustand';
+import {persist} from 'zustand/middleware';
 
 // import { Research } from "../db";
 
 export const useAppState = create(
   persist(
     (set, get) => ({
-      view: "Research",
+      view: 'Research',
       workspaceEntities: [],
-      updateView: (view) => set(() => ({ view })),
-      updateWorkspaceEntities: (entity) =>
+      updateView: view => set(() => ({view})),
+      updateWorkspaceEntities: entity =>
         set(() => ({
           // @ts-expect-error duh
           workspaceEntities: [...get().workspaceEntities, entity],
         })),
-      clearWorkspaceEntities: () => set(() => ({ workspaceEntities: [] })),
+      clearWorkspaceEntities: () => set(() => ({workspaceEntities: []})),
     }),
-    { name: "app-state" }
-  )
+    {name: 'app-state'},
+  ),
 );
 
 /** Entities

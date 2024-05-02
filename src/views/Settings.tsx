@@ -1,30 +1,30 @@
-import { useState } from "react";
-import { useTracker } from "../store/tracker";
-import { Fn } from "../db";
+import {useState} from 'react';
+import {useTracker} from '../store/tracker';
+import {Fn} from '../db';
 
 export default function Settings() {
   const bulkUpdateResearchTask = useTracker(
     // @ts-expect-error duh
-    (state) => state.bulkUpdateResearchTask
+    state => state.bulkUpdateResearchTask,
   );
-  const [importField, setImportField] = useState("");
+  const [importField, setImportField] = useState('');
 
   function handleBulkImport() {
     function entryExpansion(entry) {
-      if (!entry.includes("-")) {
+      if (!entry.includes('-')) {
         return Number(entry);
       }
-      const [low, high] = entry.split("-").map(Number);
-      return Array.from({ length: high - low + 1 }, (_, idx) => idx + low);
+      const [low, high] = entry.split('-').map(Number);
+      return Array.from({length: high - low + 1}, (_, idx) => idx + low);
     }
 
     const researchIds = importField
-      .split(",")
+      .split(',')
       .flatMap(entryExpansion)
       .flatMap(Fn.fetchResearchIdsForPid);
 
     bulkUpdateResearchTask(researchIds);
-    setImportField("");
+    setImportField('');
   }
 
   return (
@@ -34,7 +34,7 @@ export default function Settings() {
       <p>Import ✨Perfect✨ entries only</p>
       <textarea
         value={importField}
-        onChange={(e) => setImportField(e.target.value)}
+        onChange={e => setImportField(e.target.value)}
         placeholder="1-45,47-53,98,99,103-140,..."
       />
       <button

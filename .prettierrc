@@ -1,0 +1,7 @@
+{
+  "experimentalTernaries": true,
+  "printWidth": 100,
+  "singleQuote": true,
+  "bracketSpacing": false,
+  "arrowParens": "avoid"
+}

@@ -1,7 +1,7 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import {create} from 'zustand';
+import {persist} from 'zustand/middleware';
 
-import { Research } from "../db";
+import {Research} from '../db';
 
 export const useTracker = create(
   persist(
@@ -13,12 +13,12 @@ export const useTracker = create(
           researchTasks: get().researchTasks.with(id, update),
         })),
       // bulk removal later
-      bulkUpdateResearchTask: (ids) =>
+      bulkUpdateResearchTask: ids =>
         set(() => ({
           // @ts-expect-error duh
           researchTasks: get().researchTasks.map((_, id) => ids.includes(id)),
         })),
     }),
-    { name: "progress-tracker" } // prob need version here
-  )
+    {name: 'progress-tracker'}, // prob need version here
+  ),
 );
