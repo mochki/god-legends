@@ -24,6 +24,8 @@ export default function Workspace() {
   const handleResearchCatClick = e => setResearchCat(e.target.innerText.replace('::', ''));
   const clearResearchCatClick = () => setResearchCat('');
 
+  if (view !== 'Research') return null;
+
   return (
     <>
       <section className="border-l-2 border-l-indigo-300 flex flex-col w-auto p-2">
@@ -88,9 +90,6 @@ export default function Workspace() {
               </div>
             </div>
           )}
-          {/* {view === "Box Layout" && <BoxLayout />}
-          {view === "All Forms" && <Forms />}
-          {view === "Le Settings" && <Settings />} */}
           {workspaceEntities.map(({type, data: {pkid, task, category, goal, type: moveType}}) =>
             type === 'Task' ?
               <div className="flex flex-col" key={`${pkid}-${task}`}>
