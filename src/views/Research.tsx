@@ -47,7 +47,7 @@ export default function Research() {
           (filterView && statuses[idx]) || (researchCategory && category !== researchCategory) ?
             null
           : <div
-              className="grid grid-cols-subgrid col-span-8 items-center hover:bg-slate-600 cursor-pointer"
+              className="grid grid-cols-subgrid col-span-8 items-center hover:bg-slate-600 cursor-pointer border-b border-b-indigo-800"
               onClick={makeTaskSelectHandler({
                 taskId: idx,
                 pkid,
