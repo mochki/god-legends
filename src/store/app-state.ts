@@ -7,6 +7,7 @@ export const useAppState = create(
   persist(
     (set, get) => ({
       view: 'Research',
+      researchCategory: '',
       workspaceEntities: [],
       updateView: view => set(() => ({view})),
       updateWorkspaceEntities: entity =>
@@ -14,6 +15,7 @@ export const useAppState = create(
           // @ts-expect-error duh
           workspaceEntities: [...get().workspaceEntities, entity],
         })),
+      updateResearchCategory: researchCategory => set(() => ({researchCategory})),
       clearWorkspaceEntities: () => set(() => ({workspaceEntities: []})),
     }),
     {name: 'app-state'},

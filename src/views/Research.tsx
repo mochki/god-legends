@@ -2,14 +2,15 @@ import React, {useState} from 'react';
 import {useTracker} from '../store/tracker';
 import {useAppState} from '../store/app-state';
 
-import {Pokemon, Research as R} from '../db';
+import {Pokemon, Research as Rsrch, Solitude} from '../db';
 
 export default function Research() {
-  const [filterView, setFilterView] = useState(false);
+  const [filterView, setFilterView] = useState(false); // finished
 
   const statuses = useTracker(({researchTasks}) => researchTasks);
   const updateResearchTask = useTracker(({updateResearchTask}) => updateResearchTask);
 
+  const researchCategory = useAppState(({researchCategory}) => researchCategory);
   const workspaceEntities = useAppState(({workspaceEntities}) => workspaceEntities);
   const updateWorkspaceEntities = useAppState(
     ({updateWorkspaceEntities}) => updateWorkspaceEntities,
@@ -32,7 +33,7 @@ export default function Research() {
   };
 
   return (
-    <div className="grid gap-x-1 grid-cols-[repeat(6,_max-content)_repeat(1,_minmax(0,_1fr))] center">
+    <div className="grid gap-x-1 grid-cols-[repeat(7,_max-content)_repeat(1,_minmax(0,_1fr))] center">
       <div>pkId</div>
       <div>Pokemon</div>
       <div>Task</div>
@@ -40,12 +41,13 @@ export default function Research() {
       <div>Goal</div>
       <div>Type?</div>
       <div>Category</div>
+      <div>Path of Solitude Opponent</div>
       {React.Children.toArray(
-        R.map(([pkid, {task, category, goal, type}], idx) =>
-          filterView && statuses[idx] ?
+        Rsrch.map(([pkid, {task, category, goal, type}], idx) =>
+          (filterView && statuses[idx]) || (researchCategory && category !== researchCategory) ?
             null
           : <div
-              className="grid grid-cols-subgrid col-span-7 items-center hover:bg-slate-600 cursor-pointer"
+              className="grid grid-cols-subgrid col-span-8 items-center hover:bg-slate-600 cursor-pointer"
               onClick={makeTaskSelectHandler({
                 taskId: idx,
                 pkid,
@@ -69,14 +71,15 @@ export default function Research() {
               <div className="">{goal}</div>
               <div className="">{type}</div>
               <div className="">{category}</div>
+              <div>{Solitude[pkid].map(oId => Pokemon[oId].name).join(', ')}</div>
             </div>,
         ),
       )}
       <div
-        className="fixed bottom-4 left-3 h-12 w-12 flex items-center justify-center cursor-pointer bg-indigo-600/25 rounded-full text-indigo-100/50 hover:bg-indigo-600 hover:text-indigo-100 transition duration-300"
+        className="fixed bottom-4 left-3 p-2 flex items-center justify-center cursor-pointer bg-indigo-600/70 rounded-full text-indigo-100/80 hover:bg-indigo-600 hover:text-indigo-100 transition duration-300"
         onClick={() => setFilterView(!filterView)}
       >
-        Fltr
+        Filter Finished
       </div>
     </div>
   );

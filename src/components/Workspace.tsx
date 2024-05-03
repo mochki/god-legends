@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useAppState} from '../store/app-state';
 import {useTracker} from '../store/tracker';
 
@@ -9,7 +9,8 @@ import {Pokemon, Research} from '../db';
 const cats = ['Catch', 'Move: Use', 'Move: Defeat', 'Overworld', 'Special'];
 
 export default function Workspace() {
-  const [researchCat, setResearchCat] = useState('');
+  const researchCat = useAppState(({researchCategory}) => researchCategory);
+  const setResearchCat = useAppState(({updateResearchCategory}) => updateResearchCategory);
 
   const view = useAppState(({view}) => view);
   const workspaceEntities = useAppState(({workspaceEntities}) => workspaceEntities);
@@ -20,7 +21,7 @@ export default function Workspace() {
   const remainingTasks = Research.filter((_, rId) => !statuses[rId]);
   // eslint-disable-next-line
   const justCatos = remainingTasks.map(([_, {category}]) => category);
-  const handleResearchCatClick = e => setResearchCat(e.target.innerText);
+  const handleResearchCatClick = e => setResearchCat(e.target.innerText.replace('::', ''));
   const clearResearchCatClick = () => setResearchCat('');
 
   return (
@@ -28,9 +29,9 @@ export default function Workspace() {
       <section className="border-l-2 border-l-indigo-300 flex flex-col w-auto p-2">
         <div className="flex space-x-2 items-center">
           <h2 className="mt-1 mb-4 text-lg font-medium flex-grow">Workspace</h2>
-          <div className="bg-slate-600 px-1 rounded-md cursor-pointer hover:opacity-75">tskTog</div>
+          {/* <div className="bg-slate-600 px-1 rounded-md cursor-pointer hover:opacity-75">tskTog</div>
           <div className="bg-slate-600 px-1 rounded-md cursor-pointer hover:opacity-75">boxTog</div>
-          <div className="bg-slate-600 px-1 rounded-md cursor-pointer hover:opacity-75">frmTog</div>
+          <div className="bg-slate-600 px-1 rounded-md cursor-pointer hover:opacity-75">frmTog</div> */}
           <div
             className="bg-red-900 px-1 rounded-md cursor-pointer hover:opacity-75"
             onClick={() => clearWorkspaceEntities()}
@@ -83,7 +84,7 @@ export default function Workspace() {
                         )),
                     )}
                   </div>
-                : <div className="text-center text-sm">Select a Category</div>}
+                : <div className="text-center text-sm">Filter by Category</div>}
               </div>
             </div>
           )}

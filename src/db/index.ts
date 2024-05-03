@@ -10,6 +10,7 @@ import {Illegal} from './illegal.db';
 
 import {Task} from './task.db';
 import {Research} from './research.db';
+import {Solitude} from './solitude.db';
 
 const Pokemon = _Pokemon();
 
@@ -337,4 +338,4 @@ function alphaP(pokemon, form) {
 
 // @ts-expect-error duh
 window.YY = {Pokemon, ResearchExpanded};
-export {Pokemon, ResearchExpanded as Research, Fn};
+export {Pokemon, ResearchExpanded as Research, Fn, Solitude};
