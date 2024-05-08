@@ -272,19 +272,19 @@ export const Form = [
   [228, 'Classic'],
   [229, 'Classic'],
   [230, 'Classic'],
-  [231, 'Incarnate Forme'], //*
+  // [231, 'Incarnate Forme'], //*
   [231, 'Therian Forme'],
-  [232, 'Incarnate Forme'], //*
+  // [232, 'Incarnate Forme'], //*
   [232, 'Therian Forme'],
-  [233, 'Incarnate Forme'], //*
+  // [233, 'Incarnate Forme'], //*
   [233, 'Therian Forme'],
-  [234, 'Incarnate Forme'], //*
+  // [234, 'Incarnate Forme'], //*
   [234, 'Therian Forme'],
   [235, 'Origin Forme'],
-  [235, 'Classic'], //*
+  // [235, 'Classic'], //*
   [236, 'Origin Forme'],
-  [236, 'Classic'], //*
-  [237, 'Altered Forme'], //*
+  // [236, 'Classic'], //*
+  // [237, 'Altered Forme'], //*
   [237, 'Origin Forme'],
   // [238, "Bug"],
   // [238, "Dark"],
