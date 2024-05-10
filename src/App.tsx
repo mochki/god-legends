@@ -1,9 +1,11 @@
+import {IoSchoolSharp} from 'react-icons/io5';
+import {PiFarmFill} from 'react-icons/pi';
+
 import {useTracker} from './store/tracker';
 import {useAppState} from './store/app-state';
 
 import Research from './views/Research';
 import BoxLayout from './views/BoxLayout';
-import Forms from './views/Forms';
 import Settings from './views/Settings';
 import Workspace from './components/Workspace';
 
@@ -23,26 +25,41 @@ export default function App() {
 
   return (
     <>
-      <header className="h-8 flex justify-between sticky top-0 bg-indigo-950 z-10">
-        <nav className="flex justify-between space-x-4 bg-indigo-900">
-          <button onClick={handleViewClick}>Research</button>
-          <button onClick={handleViewClick}>Box Layout</button>
-          <button onClick={handleViewClick}>All Forms</button>
-          <button onClick={handleViewClick}>Le Settings</button>
+      <header className="h-8 flex sticky top-0 bg-indigo-950 z-10">
+        <nav className="flex justify-between space-x-4 px-2">
+          <button
+            onClick={handleViewClick}
+            className={view === 'Research' ? 'text-indigo-400' : undefined}
+          >
+            Research
+          </button>
+          <button
+            onClick={handleViewClick}
+            className={view === 'Box Layout' ? 'text-indigo-400' : undefined}
+          >
+            Box Layout
+          </button>
+          <button
+            onClick={handleViewClick}
+            className={view === 'Settings' ? 'text-indigo-400' : undefined}
+          >
+            Settings
+          </button>
         </nav>
-        <div>
-          Research: <progress max="100" value={taskCompletion} /> {taskCompletion.toFixed(1)}%
-        </div>
-        <div>
-          Box: <progress max="100" value={boxCompletion} /> {boxCompletion.toFixed(1)}%
+        <div className="flex items-center text-indigo-400">
+          <IoSchoolSharp className="mr-1" />
+          <progress max="100" value={taskCompletion} />
+          <span className="text-sm ml-0.5 mr-2">{taskCompletion.toFixed(1)}%</span>
+          <PiFarmFill className="mr-0.5" />
+          <progress max="100" value={boxCompletion} />
+          <span className="text-sm ml-0.5">{boxCompletion.toFixed(1)}%</span>
         </div>
       </header>
       <main className="flex">
         <div className="flex-auto p-2">
           {view === 'Research' && <Research />}
           {view === 'Box Layout' && <BoxLayout />}
-          {view === 'All Forms' && <Forms />}
-          {view === 'Le Settings' && <Settings />}
+          {view === 'Settings' && <Settings />}
         </div>
         <Workspace />
       </main>

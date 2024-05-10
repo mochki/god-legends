@@ -47,3 +47,36 @@ body {
 main {
   min-height: calc(100vh - 2rem);
 }
+
+/* App progress bars */
+progress[value] {
+  --prog-color: rgb(129 140 248); /* the progress color */
+  --prog-background: rgb(2 44 34); /* the background color */
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  border: 1px solid rgb(165 180 252);
+
+  width: 5rem;
+  height: 0.35rem;
+  margin: 0;
+  border-radius: 0.3rem;
+  background: var(--prog-background);
+}
+
+progress[value]::-webkit-progress-bar {
+  border-radius: 0.3rem;
+  background: var(--prog-background);
+}
+
+progress[value]::-webkit-progress-value {
+  border-radius: 0.2rem;
+  background: var(--prog-color);
+}
+
+progress[value]::-moz-progress-bar {
+  border-radius: 0.2rem;
+  background: var(--prog-color);
+}
