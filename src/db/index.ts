@@ -53,7 +53,7 @@ Object.values(Pokemon).forEach(pokemon => {
     );
   });
 
-  // @ts-expect-error 'better' version    [[{}, {}]]
+  // 'better' version    [[{}, {}]]
   pokemon.boxTargets = pokemon.forms.flatMap(form => {
     const base = {pokemon: pokemon.name, form, alpha: alphaP(pokemon, form)};
     const forms = [];
