@@ -10,11 +10,14 @@ import Workspace from './components/Workspace';
 export default function App() {
   const view = useAppState(({view}) => view);
   const setView = useAppState(({updateView}) => updateView);
-  // @ts-expect-error duh
-  const researchTasks = useTracker(state => state.researchTasks);
+  const researchTasks = useTracker(({researchTasks}) => researchTasks);
+  const boxedPokemon = useTracker(({boxedPokemon}) => boxedPokemon);
 
   const taskCompletion =
     (100 * researchTasks.reduce((sum, status) => sum + Number(status), 0)) / researchTasks.length;
+
+  const boxCompletion =
+    (100 * boxedPokemon.reduce((sum, status) => sum + (status ? 1 : 0), 0)) / boxedPokemon.length;
 
   const handleViewClick = e => setView(e.target.innerText);
 
@@ -31,7 +34,7 @@ export default function App() {
           Research: <progress max="100" value={taskCompletion} /> {taskCompletion.toFixed(1)}%
         </div>
         <div>
-          WIP.Box: <progress max="100" value="20" />
+          Box: <progress max="100" value={boxCompletion} /> {boxCompletion.toFixed(1)}%
         </div>
       </header>
       <main className="flex">

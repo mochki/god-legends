@@ -3,7 +3,7 @@ import {useTracker} from '../store/tracker';
 import {Pokemon} from '../db';
 import {Sprites} from '../assets/sprites';
 import alphaUrl from '../assets/alpha.png';
-import {IoFemaleSharp, IoMaleSharp} from 'react-icons/io5';
+import {IoFemaleSharp, IoMaleSharp, IoGitCommit} from 'react-icons/io5';
 import {HiOutlineSparkles} from 'react-icons/hi2';
 
 const uniques = Object.values(Pokemon)
@@ -23,7 +23,7 @@ export default function BoxLayout() {
   const updateBoxedPokemon = useTracker(({updateBoxedPokemon}) => updateBoxedPokemon);
 
   const handlePokemonClick = uid => () => {
-    updateBoxedPokemon(uid, collected[uid]);
+    updateBoxedPokemon(uid, !collected[uid]);
   };
 
   const boxes = splitArray(uniques, BOXLIMIT);
@@ -66,9 +66,11 @@ export default function BoxLayout() {
                 {_.gender === 'Male' && (
                   <IoMaleSharp className="absolute h-1/4 w-1/4 bottom-1 left-1 text-blue-300" />
                 )}
-                {/* lol did i even implement this? */}
                 {collected[_.uid] && (
-                  <div className="absolute h-1/4 w-1/4 bottom-4 left-4 text-pink-600">GOT</div>
+                  <IoGitCommit
+                    className="absolute h-full w-full inset-0 text-emerald-600 bg-stone-800	opacity-65"
+                    title={_.form}
+                  />
                 )}
               </div>
             ))}
