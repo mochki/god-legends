@@ -86,10 +86,10 @@ export const Form = [
   [79, 'Classic'],
   [80, 'Classic'],
   [81, 'Classic'],
-  [82, 'East Sea'],
   [82, 'West Sea'],
-  [83, 'East Sea'],
+  [82, 'East Sea'],
   [83, 'West Sea'],
+  [83, 'East Sea'],
   [84, 'Classic'],
   [85, 'Classic'],
   [86, 'Classic'],
@@ -229,12 +229,12 @@ export const Form = [
   [191, 'Classic'],
   [192, 'Classic'],
   [193, 'Classic'],
-  [194, 'Fan'], //*
-  [194, 'Frost'], //*
-  [194, 'Heat'], //*
-  [194, 'Mow'], //*
+  // [194, 'Fan'], //*
+  // [194, 'Frost'], //*
+  // [194, 'Heat'], //*
+  // [194, 'Mow'], //*
   [194, 'Classic'],
-  [194, 'Wash'], //*
+  // [194, 'Wash'], //*
   [195, 'Classic'],
   [196, 'Classic'],
   [197, 'Classic'],
