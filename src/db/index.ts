@@ -53,23 +53,21 @@ Object.values(Pokemon).forEach(pokemon => {
     );
   });
 
-  // 'better' version    [[{}, {}]]
+  // @ts-expect-error 'better' version    [[{}, {}]]
   pokemon.boxTargets = pokemon.forms.flatMap(form => {
     const base = {pokemon: pokemon.name, form, alpha: alphaP(pokemon, form)};
     const forms = [];
-    
+
     if (shinyP(pokemon, form)) {
       if (alphaP(pokemon, form)) {
-        // @ts-expect-error adding
         forms.push({...base, shiny: true, alpha: true});
       } else {
-        // @ts-expect-error adding
         forms.push({...base, shiny: true});
       }
     } // Game specific - No alpha that can't be shiny
 
     forms.push(base);
-    
+
     return forms.flatMap(form =>
       // @ts-expect-error duh
       pokemon.genders.map(gender => ({...form, gender})),
