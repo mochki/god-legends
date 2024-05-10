@@ -55,9 +55,9 @@ Object.values(Pokemon).forEach(pokemon => {
 
   // @ts-expect-error 'better' version    [[{}, {}]]
   pokemon.boxTargets = pokemon.forms.flatMap(form => {
-    const base = {pokemon: pokemon.name, form};
-    const forms = [base];
-
+    const base = {pokemon: pokemon.name, form, alpha: alphaP(pokemon, form)};
+    const forms = [];
+    
     if (shinyP(pokemon, form)) {
       if (alphaP(pokemon, form)) {
         // @ts-expect-error adding
@@ -68,6 +68,8 @@ Object.values(Pokemon).forEach(pokemon => {
       }
     } // Game specific - No alpha that can't be shiny
 
+    forms.push(base);
+    
     return forms.flatMap(form =>
       // @ts-expect-error duh
       pokemon.genders.map(gender => ({...form, gender})),
